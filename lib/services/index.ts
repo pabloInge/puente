@@ -11,3 +11,5 @@ export * from './indications'
 export * from './journal'
 export * from './summaries'
 export * from './progress'
+export * from './admin'
+

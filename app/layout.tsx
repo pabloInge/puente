@@ -1,16 +1,18 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
-import { Noto_Sans } from 'next/font/google'
+import { Archivo } from 'next/font/google'
 
 import { ThemeProvider } from '@/components/theme-provider'
 import { Toaster } from '@/components/ui/sonner'
 import { TooltipProvider } from '@/components/ui/tooltip'
+import { DemoSwitch } from '@/components/layout/demo-switch'
 import './globals.css'
 
-const brandFont = Noto_Sans({
+const brandFont = Archivo({
   subsets: ['latin'],
   variable: '--font-brand',
   display: 'swap',
+  weight: ['400', '500', '600', '700', '800'],
 })
 
 export const metadata: Metadata = {
@@ -49,7 +51,8 @@ export default function RootLayout({
   return (
     <html lang="es-AR" className={`${brandFont.variable} bg-background`} suppressHydrationWarning>
       <body className="font-sans">
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} disableTransitionOnChange>
+          <DemoSwitch />
           <TooltipProvider>{children}</TooltipProvider>
           <Toaster />
         </ThemeProvider>

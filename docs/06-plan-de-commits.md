@@ -252,16 +252,16 @@ Carpetas: `app/profesional/pacientes/[bondId]/{resumenes,progreso,cierre}`, `app
 
 Carpetas: `app/admin/**`, `components/domain/admin`, `lib/services/admin/*.ts`.
 
-#### [ ] G-01 Catálogos
+#### [x] G-01 Catálogos
 - Ramas (con subramas y orden), enfoques, coberturas y programas, bonificaciones.
 - **CU:** G-01, G-02.
 
-#### [ ] G-02 Consentimientos, plantillas y configuración
+#### [x] G-02 Consentimientos, plantillas y configuración
 - Versiones del consentimiento, términos y privacidad (publicar una versión nueva no altera las aceptaciones previas).
 - Plantillas globales. Parámetros de la plataforma (P-05, R-07, P-11, cierre semanal, lenguaje natural activado).
 - **CU:** G-03, G-04, G-05.
 
-#### [ ] G-03 Usuarios y auditoría
+#### [x] G-03 Usuarios y auditoría
 - Lista de usuarios con suspensión y reactivación, sin datos clínicos.
 - Visor del registro de auditoría con filtros.
 - **CU:** G-06, G-07 · **Reglas:** R-11.
