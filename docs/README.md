@@ -1,4 +1,4 @@
-# proyecto-ship — Documentación técnica
+# Puente — Documentación técnica
 
 Plataforma de psicología para Argentina con dos enfoques:
 

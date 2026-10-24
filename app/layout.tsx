@@ -15,8 +15,8 @@ const brandFont = Noto_Sans({
 
 export const metadata: Metadata = {
   title: {
-    default: 'proyecto-ship',
-    template: '%s · proyecto-ship',
+    default: 'Puente',
+    template: '%s · Puente',
   },
   description:
     'Plataforma que conecta pacientes con profesionales de la psicología en Argentina: búsqueda, turnos, sesiones online e historia clínica.',
