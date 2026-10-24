@@ -39,7 +39,7 @@ Documentos 01 a 07. Decisiones P-01 a P-12 resueltas.
 
 Orden obligatorio: F1-01 → F1-02 → F1-03 → F1-04 → F1-05 → F1-06. Al terminar F1, los **archivos compartidos quedan congelados** (ver guía §3).
 
-### [ ] F1-01 Sistema de diseño
+### [x] F1-01 Sistema de diseño
 - **Objetivo:** tokens estilo Fluent 2 intercambiables.
 - **Entregables:**
   - `app/globals.css`: colores semánticos (claro y oscuro), `--surface-1..3`, `--success`, `--warning`, `--danger`, radios, elevaciones `--shadow-2/4/8/16`, tipografía en `--font-sans`.
