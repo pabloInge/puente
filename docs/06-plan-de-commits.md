@@ -70,7 +70,7 @@ Orden obligatorio: F1-01 → F1-02 → F1-03 → F1-04 → F1-05 → F1-06. Al t
 - **Docs:** 04 completo.
 - **Aceptación:** la migración corre en una base vacía. Un `UPDATE` directo sobre `clinical_entry` falla. Dos vínculos abiertos del mismo paciente fallan.
 
-### [ ] F1-04 Autenticación y roles
+### [x] F1-04 Autenticación y roles
 - **Entregables:**
   - Better Auth con email y contraseña, campos `role`, `birth_date` y `status`.
   - `/registro` con elección de rol, validación de 18 años o más y aceptación de términos y privacidad. `/ingresar`. Cierre de sesión.
