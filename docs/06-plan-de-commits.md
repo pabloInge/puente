@@ -184,23 +184,23 @@ Carpetas: `app/profesional/agenda`, `app/paciente/turnos`, `app/sesion`, `app/ap
 
 Carpetas: `app/profesional/pacientes/[bondId]/historia-clinica`, `app/profesional/plantillas`, `components/domain/clinical`, `lib/services/clinical.ts`, `lib/pdf/clinical-record.tsx`.
 
-#### [ ] C-01 Entradas y enmiendas
+#### [x] C-01 Entradas y enmiendas
 - Punto de inicio y primeras impresiones (una por vínculo), notas de evolución asociables a un turno realizado.
 - Enmiendas vinculadas. El original se ve como "enmendado".
 - Hash SHA-256 y snapshot de la matrícula. Auditoría de cada lectura y escritura.
 - **CU:** D-01 a D-04 · **Reglas:** R-04, R-11.
 - **Aceptación:** no existe acción de editar ni borrar. El hash se verifica en la vista.
 
-#### [ ] C-02 Plantillas
+#### [x] C-02 Plantillas
 - Plantillas propias del profesional, duplicar una global, aplicar una plantilla al crear una entrada.
 - **CU:** D-05 · **Docs:** 01 P-10.
 
-#### [ ] C-03 Ficha del paciente y línea de tiempo
+#### [x] C-03 Ficha del paciente y línea de tiempo
 - `/profesional/pacientes` (lista de vínculos activos y finalizados) y `/profesional/pacientes/[bondId]` (ficha con datos según R-02 o R-03, y línea de tiempo con entradas, turnos, indicaciones y resúmenes).
 - La línea de tiempo expone un **registro de fuentes**: cada pista agrega su tipo de evento en `lib/timeline/sources/<pista>.ts`, sin editar el componente.
 - **CU:** D-06 · **Reglas:** R-02, R-03.
 
-#### [ ] C-04 Copia de historia clínica
+#### [x] C-04 Copia de historia clínica
 - Solicitud del paciente desde `/paciente/historial`, bandeja con vencimiento de 48 h para el profesional, exportación en PDF, entrega y descarga.
 - **CU:** D-07 · **Reglas:** R-14, R-15.
 
