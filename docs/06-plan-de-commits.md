@@ -79,7 +79,7 @@ Orden obligatorio: F1-01 → F1-02 → F1-03 → F1-04 → F1-05 → F1-06. Al t
 - **CU:** A-01, A-02 · **Reglas:** R-06 · **Docs:** 02 §1, 05 §5.
 - **Aceptación:** un paciente no entra a `/profesional` ni a `/admin`. Un menor de 18 no puede registrarse. Un usuario suspendido no inicia sesión.
 
-### [ ] F1-05 Servicios base, políticas e interfaces
+### [x] F1-05 Servicios base, políticas e interfaces
 - **Objetivo:** dejar los contratos que usan todas las pistas.
 - **Entregables:**
   - `lib/services/_base.ts`: patrón de servicio (recibe la sesión, valida con Zod y autoriza) y errores tipados (`Forbidden`, `NotFound`, `RuleViolation` con código de regla).
