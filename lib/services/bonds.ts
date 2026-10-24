@@ -360,3 +360,9 @@ export async function breakBond(session: Session, bondId: string, reason: string
 
   return endedBond
 }
+
+export async function getBond(session: Session, bondId: string) {
+  const access = await requireBondAccess(session, bondId, 'read-historical')
+  return access.bond
+}
+

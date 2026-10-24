@@ -227,23 +227,23 @@ Carpetas: `app/paciente/tratamiento`, `app/paciente/diario`, `app/profesional/pa
 
 Carpetas: `app/profesional/pacientes/[bondId]/{resumenes,progreso,cierre}`, `app/paciente/progreso`, `app/paciente/historial` (resúmenes de cierre), `app/api/cron/weekly-summaries`, `app/api/export`, `components/domain/{summaries,progress}`, `lib/services/{summaries,progress,closing}.ts`, `lib/summaries/aggregate.ts`, `lib/pdf/closing-summary.tsx`.
 
-#### [ ] E-01 Resumen semanal
+#### [x] E-01 Resumen semanal
 - `aggregate.ts` (función pura con tests): diario por tipo, estado de ánimo, indicaciones vistas o comentadas, turnos y mensajes.
 - Cron de los lunes a las 00:00 de Argentina, idempotente por `(bond_id, week_start)`.
 - Vista del profesional con anotación privada y opción de compartir con el paciente. Botón "Redactar con IA" (mock).
 - **CU:** F-01, F-02 · **Docs:** 01 P-06.
 
-#### [ ] E-02 Resumen histórico
+#### [x] E-02 Resumen histórico
 - Vista consolidada del vínculo: punto de inicio, gráfico de progreso, resúmenes acumulados, hitos y redacción opcional con IA (mock).
 - **CU:** F-03.
 
-#### [ ] E-03 Progreso
+#### [x] E-03 Progreso
 - Configuración por vínculo: formato (etapas, porcentaje o escala) y política de visibilidad.
 - Registro de actualizaciones (también desde una nota de evolución de C-01 si ya existe).
 - Gráfico con la skill de charts. Vista del paciente con el interruptor "Ver mi progreso", la recomendación o el aviso de bloqueo.
 - **CU:** F-06, F-07, F-08 · **Reglas:** R-05 · **Docs:** 01 P-11, 04 §4.4.
 
-#### [ ] E-04 Resumen de cierre
+#### [x] E-04 Resumen de cierre
 - Solicitud del paciente, borrador precargado, edición y aprobación del profesional, inmutabilidad.
 - Exportación en PDF. Adjuntar el resumen a la experiencia pasada del paciente.
 - **CU:** F-04, F-05 · **Reglas:** R-13.
