@@ -96,7 +96,7 @@ Pasos: ...
 ## 7. Plantilla de instrucción para un agente
 
 ```
-Sos el agente de la pista <X> del proyecto proyecto-ship.
+Sos el agente de la pista <X> del proyecto Puente.
 Leé docs/README.md, docs/06-plan-de-commits.md y docs/07-guia-de-desarrollo.md.
 Tu tarea es <ID>. Leé los documentos que cita.
 Trabajá solo en las carpetas de tu pista. No edites archivos compartidos (guía §3).
