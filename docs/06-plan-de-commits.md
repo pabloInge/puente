@@ -111,7 +111,7 @@ Cada pista tiene un **dueño** y sus propias carpetas (ver guía §3). Dentro de
 
 Carpetas: `app/(public)`, `app/paciente/perfil`, `app/paciente/profesionales`, `app/paciente/mensajes`, `app/paciente/historial` (solo experiencias pasadas), `app/profesional/perfil`, `app/profesional/solicitudes`, `app/profesional/mensajes`, `components/domain/{search,bond,chat,profile}`, `lib/services/{profiles,search,chat,bonds}.ts`.
 
-#### [ ] A-01 Perfiles
+#### [x] A-01 Perfiles
 - Onboarding y edición del perfil profesional con foto (Blob). Publicación cuando están los campos obligatorios.
 - Perfil público `/profesionales/[id]` con ramas, enfoques, atenciones, coberturas, próxima disponibilidad y "Matrícula no verificada".
 - Perfil del paciente con datos personales (DNI cifrado), cobertura y temas iniciales.
@@ -119,7 +119,7 @@ Carpetas: `app/(public)`, `app/paciente/perfil`, `app/paciente/profesionales`, `
 - **CU:** A-03, A-04, A-05, A-06, B-03 · **Reglas:** R-13.
 - **Aceptación:** un perfil incompleto no aparece en búsquedas. El DNI no se guarda en texto plano.
 
-#### [ ] A-02 Búsqueda y recomendaciones
+#### [x] A-02 Búsqueda y recomendaciones
 - Landing con buscador doble: filtros y lenguaje natural.
 - `/buscar`: filtros por rama, modalidad, provincia o localidad, cobertura o programa, honorarios, idioma y "disponible esta semana". Estado en la URL.
 - Lenguaje natural con `mockEngine`: temas detectados, ramas sugeridas, profesionales recomendados con su motivo, y aviso de que es una orientación y no un diagnóstico.
@@ -128,7 +128,7 @@ Carpetas: `app/(public)`, `app/paciente/perfil`, `app/paciente/profesionales`, `
 - **CU:** B-01, B-02 · **Docs:** 05 §7, §8.
 - **Aceptación:** buscar sin cuenta funciona. Las acciones de contacto piden iniciar sesión. Los filtros se pueden compartir por URL.
 
-#### [ ] A-03 Chat
+#### [x] A-03 Chat
 - Iniciar conversación desde el perfil. Lista de conversaciones y vista de conversación con polling SWR (5 s) e indicador de no leídos.
 - Límites de R-09: 3 conversaciones abiertas, 3 mensajes antes de la respuesta. Cerrar y bloquear desde el profesional.
 - Adjuntos durante el vínculo (Blob privado).
@@ -136,7 +136,7 @@ Carpetas: `app/(public)`, `app/paciente/perfil`, `app/paciente/profesionales`, `
 - **CU:** B-04, B-09 · **Reglas:** R-09.
 - **Aceptación:** el 4.º mensaje sin respuesta se rechaza con un mensaje claro. Un paciente bloqueado no puede escribir.
 
-#### [ ] A-04 Vínculo, consentimiento e intake
+#### [x] A-04 Vínculo, consentimiento e intake
 - Solicitar vínculo con mensaje y primera consulta opcional (usa el servicio de turnos de B-02; si todavía no está, se oculta el selector).
 - Bandeja de solicitudes del profesional con `PatientPreview` (R-01). Aceptar o rechazar con motivo.
 - Aceptación del consentimiento vigente (versión, fecha, IP y user agent).

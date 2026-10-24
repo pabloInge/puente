@@ -1,23 +1,31 @@
 import Link from 'next/link'
-
-import { Badge } from '@/components/ui/badge'
 import { buttonVariants } from '@/components/ui/button'
 import { Icon, icons } from '@/components/ui/icon'
+import { Input } from '@/components/ui/input'
 import { routes } from '@/lib/navigation'
 
 const steps = [
-  { icon: icons.Search, title: 'Buscá', text: 'Por rama, modalidad, cobertura o contando con tus palabras qué te pasa.' },
-  { icon: icons.MessageSquare, title: 'Conversá', text: 'Escribile al profesional antes de pedir el primer turno.' },
-  { icon: icons.Handshake, title: 'Empezá', text: 'Turnos, sesiones online, diario e indicaciones en un solo lugar.' },
+  {
+    icon: icons.Search,
+    title: 'Buscá',
+    text: 'Por rama, modalidad, cobertura o contando con tus palabras qué te pasa.',
+  },
+  {
+    icon: icons.MessageSquare,
+    title: 'Conversá',
+    text: 'Escribile al profesional antes de pedir el primer turno.',
+  },
+  {
+    icon: icons.Handshake,
+    title: 'Empezá',
+    text: 'Turnos, sesiones online, diario e indicaciones en un solo lugar.',
+  },
 ]
 
 export default function HomePage() {
   return (
     <div className="mx-auto flex w-full max-w-6xl flex-col gap-16 px-4 py-12 lg:px-8 lg:py-20">
       <section className="flex max-w-3xl flex-col gap-6">
-        <Badge variant="outline" className="w-fit">
-          En construcción ({routes.home.task})
-        </Badge>
         <h1 className="text-4xl font-semibold tracking-tight text-balance text-foreground sm:text-5xl">
           Un puente entre lo que te pasa y quien te puede acompañar.
         </h1>
@@ -25,12 +33,30 @@ export default function HomePage() {
           Encontrá profesionales de la psicología en Argentina, con tu cobertura o programa, y seguí tu tratamiento desde un
           mismo lugar.
         </p>
-        <div className="flex flex-wrap gap-3">
-          <Link href={routes.search.href} className={buttonVariants({ size: 'lg' })}>
+
+        {/* Dual Search: Natural Language Search Form */}
+        <form action="/buscar" method="GET" className="mt-2 flex flex-col gap-3 sm:flex-row">
+          <div className="relative flex-1">
+            <Input
+              name="q"
+              placeholder="Contanos qué estás buscando o qué te pasa..."
+              className="h-12 text-base pr-10"
+            />
+          </div>
+          <button
+            type="submit"
+            className={buttonVariants({ size: 'lg', className: 'h-12' })}
+          >
             <Icon icon={icons.Search} size="sm" data-icon="inline-start" />
-            Buscar profesionales
+            Buscar
+          </button>
+        </form>
+
+        <div className="flex flex-wrap items-center gap-3 pt-2">
+          <Link href={routes.search.href} className={buttonVariants({ variant: 'outline', size: 'sm' })}>
+            Ver todos los profesionales
           </Link>
-          <Link href={routes.signUp.href} className={buttonVariants({ size: 'lg', variant: 'outline' })}>
+          <Link href={routes.signUp.href} className={buttonVariants({ variant: 'ghost', size: 'sm' })}>
             Soy profesional
           </Link>
         </div>
