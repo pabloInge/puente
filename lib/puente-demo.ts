@@ -828,7 +828,7 @@ export function getSesionGuardada(): SesionPaciente | null {
   } catch {
     sesionCache = null
   }
-  return sesionCache
+  return sesionCache ?? null
 }
 
 export function guardarSesion(sesion: SesionPaciente | null) {
