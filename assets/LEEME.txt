@@ -1,0 +1,44 @@
+PUENTE · Recursos gráficos
+==========================
+
+1) public/  → copiar tal cual en la carpeta pública del proyecto.
+   El código los pide con estas rutas exactas:
+
+   /pros/pro1.png   Lic. Martina Ferreyra   (también aparece en la landing)
+   /pros/pro2.png   Lic. Julián Bertolini
+   /pros/pro3.png   Lic. Carolina Méndez
+   /pros/pro4.png   Lic. Lautaro Quiroga
+   /pros/pro5.png   Lic. Agustina Peralta
+   /pros/pro6.png   Lic. Ramiro Ledesma
+   /pros/pro7.png   Lic. Florencia Ibarra
+
+   /placeholder.svg      foto por defecto si un profesional no tiene foto
+   /icon.svg             favicon (vectorial)
+   /icon-light-32x32.png favicon para tema claro
+   /icon-dark-32x32.png  favicon para tema oscuro
+   /apple-icon.png       ícono al guardar en la pantalla de inicio (iPhone)
+
+   Los pacientes NO tienen foto: se muestran con iniciales (círculo de color).
+
+2) optimizadas/  → las mismas 7 fotos en WebP 512×512 (~30 KB c/u en vez de ~1,6 MB).
+   Recomendado para producción. En pantalla se muestran a 36–88 px.
+
+3) logo/  → isotipo de Puente en SVG.
+   puente-logo.svg            para fondos claros
+   puente-logo-sobre-azul.svg para fondos azules
+   La palabra "puente" es texto en Archivo ExtraBold (800), color #3255A4,
+   interletrado -0.045em. No es una imagen.
+
+4) Tipografía: Archivo (Google Fonts), pesos 400, 500, 600, 700 y 800.
+   https://fonts.google.com/specimen/Archivo
+
+5) Íconos de la interfaz: librería lucide-react (no son archivos).
+
+6) Colores
+   Azul       #3255A4   (principal)
+   Fucsia     #FF48B0   (acento, titular, montos por cobrar)
+   Tinta      #23304F   (texto)
+   Gris       #6B7591   (texto secundario)
+   Rosa claro #FFE3F2
+   Papel      #F7F5F0   (fondo)
+   Advertencia #9A5A12 sobre #FBF0DF

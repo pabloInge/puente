@@ -340,7 +340,7 @@ export const PROFESIONALES_MOCK: Profesional[] = [
     frase: 'Trabajo con herramientas concretas para que notes cambios en tu día a día.',
     bio: 'Psicóloga (UNR). Trabajo con terapia cognitivo-conductual: herramientas concretas para entender lo que sentís y animarte a hacer cambios a tu ritmo.',
     disponible: 'Turnos esta semana',
-    foto: 'https://images.unsplash.com/photo-1594824813511-209861e6d42d?q=80&w=400&auto=format&fit=crop',
+    foto: '/assets/pros/pro1.webp',
     emiteFactura: true,
     duracionMin: 50,
     formacion: [
@@ -366,7 +366,7 @@ export const PROFESIONALES_MOCK: Profesional[] = [
     frase: 'Hablar es la forma de empezar a entender lo que nos pasa.',
     bio: 'Psicoanalista. Atiendo adultos en consultorio en barrio Martin. Me interesa escuchar tu historia sin apuro.',
     disponible: 'Turnos la semana próxima',
-    foto: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=400&auto=format&fit=crop',
+    foto: '/assets/pros/pro2.webp',
     emiteFactura: true,
     duracionMin: 45,
     formacion: [
@@ -391,7 +391,7 @@ export const PROFESIONALES_MOCK: Profesional[] = [
     frase: 'No estamos solos: miramos también los vínculos que nos rodean.',
     bio: 'Terapeuta sistémica. Acompaño procesos individuales, de pareja y familia, con perspectiva de género y diversidad.',
     disponible: 'Turnos esta semana',
-    foto: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=400&auto=format&fit=crop',
+    foto: '/assets/pros/pro3.webp',
     emiteFactura: false,
     duracionMin: 50,
     formacion: [
@@ -416,7 +416,7 @@ export const PROFESIONALES_MOCK: Profesional[] = [
     frase: 'No se trata de pelearte con lo que sentís, sino de vivir según lo que te importa.',
     bio: 'Trabajo con terapia de aceptación y compromiso. Atiendo jóvenes y adultos, solo online.',
     disponible: 'Turnos esta semana',
-    foto: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop',
+    foto: '/assets/pros/pro4.webp',
     emiteFactura: true,
     duracionMin: 50,
     formacion: [
@@ -441,7 +441,7 @@ export const PROFESIONALES_MOCK: Profesional[] = [
     frase: 'El cuerpo también recuerda; podemos ayudarlo a soltar.',
     bio: 'Especializada en trauma y pánico. Formación en EMDR. Consultorio en zona Centro.',
     disponible: 'Turnos en 2 semanas',
-    foto: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=400&auto=format&fit=crop',
+    foto: '/assets/pros/pro5.webp',
     emiteFactura: true,
     duracionMin: 60,
     formacion: [
@@ -467,7 +467,7 @@ export const PROFESIONALES_MOCK: Profesional[] = [
     frase: 'Darte cuenta de lo que sentís ya es empezar a cambiar.',
     bio: 'Psicólogo gestáltico. Espacio cálido y sin juicios, con mucha experiencia en población LGBTIQ+.',
     disponible: 'Turnos esta semana',
-    foto: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=400&auto=format&fit=crop',
+    foto: '/assets/pros/pro6.webp',
     emiteFactura: false,
     duracionMin: 50,
     formacion: [
@@ -492,7 +492,7 @@ export const PROFESIONALES_MOCK: Profesional[] = [
     frase: 'Pequeños cambios sostenidos hacen una gran diferencia.',
     bio: 'Psicóloga clínica, formada en terapia cognitiva del insomnio. Trabajo con objetivos claros y revisables.',
     disponible: 'Turnos la semana próxima',
-    foto: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop',
+    foto: '/assets/pros/pro7.webp',
     emiteFactura: true,
     duracionMin: 50,
     formacion: [
@@ -1059,3 +1059,4 @@ export function crearSesionDemoCompleta(): SesionPaciente {
     },
   })
 }
+

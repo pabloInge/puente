@@ -144,7 +144,7 @@ function ChatPreview() {
         style={{ animationDelay: '1400ms', animationFillMode: 'both' }}
       >
         <Image
-          src="https://images.unsplash.com/photo-1594824813511-209861e6d42d?q=80&w=400&auto=format&fit=crop"
+          src="/assets/pros/pro1.webp"
           alt="Foto de Martina Ferreyra"
           width={44}
           height={44}
@@ -236,3 +236,4 @@ export default function HomePage() {
     </div>
   )
 }
+
