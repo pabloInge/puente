@@ -57,6 +57,7 @@ Formato: **Actor** · **Precondición** · **Flujo principal** · **Alternativas
 ### CU-B-05 Solicitar vínculo terapéutico
 - **Actor:** Paciente
 - **Flujo:** desde el perfil o el chat, envía la solicitud con un mensaje y, opcionalmente, una solicitud de "primera consulta" en un turno disponible. Estado `solicitado`.
+- **Errores:** ya tiene un vínculo abierto con otro profesional (R-12). Se le muestra con quién y las opciones "Cancelar solicitud" o "Finalizar vínculo".
 
 ### CU-B-06 Aceptar o rechazar un vínculo
 - **Actor:** Profesional
@@ -69,8 +70,8 @@ Formato: **Actor** · **Precondición** · **Flujo principal** · **Alternativas
 
 ### CU-B-08 Romper el vínculo
 - **Actor:** Paciente o Profesional
-- **Flujo:** confirma la finalización con un motivo. El vínculo pasa a `finalizado`. Se cancelan los turnos futuros. Se ofrece al profesional generar el **resumen de cierre** (CU-F-04) y al paciente solicitarlo (CU-F-05).
-- **Reglas:** R-03.
+- **Flujo:** confirma la finalización con un motivo. El vínculo pasa a `finalizado`. Se cancelan los turnos futuros y la conversación queda de solo lectura. Se crea una experiencia pasada para el paciente (R-13). Se ofrece al profesional generar el **resumen de cierre** (CU-F-04) y al paciente solicitarlo (CU-F-05).
+- **Reglas:** R-03, R-13.
 
 ### CU-B-09 Mensajería durante el vínculo
 - **Actor:** Paciente, Profesional
@@ -113,7 +114,8 @@ Formato: **Actor** · **Precondición** · **Flujo principal** · **Alternativas
 
 ### CU-C-09 Realizar sesión online
 - **Actor:** Paciente, Profesional
-- **Flujo:** desde el turno confirmado online, el botón "Entrar a la sesión" se habilita 10 minutos antes y abre la sala de videollamada embebida (P-04). La sala es única por turno.
+- **Flujo:** desde el turno confirmado online, el botón "Entrar a la sesión" se habilita 10 minutos antes y abre la sala de videollamada embebida (Daily, P-04). La sala es privada y única por turno; cada participante entra con su propio token, que vence al terminar el turno más 30 minutos.
+- **Alternativas:** si el proveedor no está configurado, se muestra un aviso y el botón queda deshabilitado.
 
 ---
 
@@ -144,7 +146,8 @@ Formato: **Actor** · **Precondición** · **Flujo principal** · **Alternativas
 
 ### CU-D-07 Solicitar copia de historia clínica
 - **Actor:** Paciente → Profesional (P-02)
-- **Flujo:** el paciente solicita; el profesional exporta y entrega. Queda registrado.
+- **Flujo:** el paciente solicita; el profesional ve la solicitud con el vencimiento de 48 h, exporta el PDF y lo entrega. El paciente lo descarga desde su historial. Queda auditado.
+- **Reglas:** R-14. Disponible también con el vínculo finalizado.
 
 ---
 
@@ -155,7 +158,7 @@ Formato: **Actor** · **Precondición** · **Flujo principal** · **Alternativas
 - **Flujo:** al activarse el vínculo, completa una sola vez qué necesita y por qué decide iniciar tratamiento. Después es solo lectura.
 
 ### CU-E-02 Escribir en el diario
-- **Actor:** Paciente · **Precondición:** al menos un vínculo activo (P-01)
+- **Actor:** Paciente · **Precondición:** vínculo activo (hay uno solo, R-12)
 - **Flujo:** crea entradas cuando lo necesite, de tipo **conflicto**, **necesidad** u **otro**. Lleva texto y un estado de ánimo opcional. Se agrupan por semana.
 - **Reglas:** R-07. No puede ocultarlas.
 

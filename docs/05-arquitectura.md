@@ -11,14 +11,15 @@
 | UI | Tailwind v4 + shadcn/ui con tokens estilo Fluent 2 | Ya instalado. Permite cambiar la marca por tokens |
 | Datos en cliente | SWR | Polling del chat y del diario, caché |
 | Archivos | Vercel Blob (privado) | Fotos, recursos, PDF exportados |
-| Videollamada | Jitsi embebido (demo), P-04 | Sin cuenta ni costo |
+| Videollamada | Daily Prebuilt (P-04) | Salas privadas con token por usuario. Plan gratuito suficiente |
+| Tests | Vitest | Políticas puras y servicios |
 | Tareas programadas | Vercel Cron → Route Handler | Cierre semanal y recordatorios |
 | PDF | `@react-pdf/renderer` en el servidor | Exportar resumen de cierre e historia clínica |
 | IA (futuro) | AI SDK + AI Gateway detrás de una interfaz | Hoy mock (P-06) |
 | Email (opcional) | Resend | Recordatorios (P-09) |
 
-**Integraciones a conectar:** Neon (obligatoria), Blob (desde el commit de recursos) y Resend (opcional).
-**Variable de entorno requerida:** `BETTER_AUTH_SECRET`.
+**Integraciones a conectar:** Neon (obligatoria), Blob (desde F1) y Resend (opcional).
+**Variables de entorno:** `BETTER_AUTH_SECRET` (obligatoria), `DAILY_API_KEY` (videollamada), `CRON_SECRET` (protege los crons), `FIELD_ENCRYPTION_KEY` (cifrado del DNI).
 
 ## 2. Estructura de carpetas
 
@@ -63,7 +64,8 @@ app/
   api/
     auth/[...all]/route.ts
     cron/weekly-summaries/route.ts
-    cron/reminders/route.ts
+    cron/reminders/route.ts         # recordatorios y vencimiento de turnos
+    cron/chat-inactivity/route.ts
     export/closing-summary/[id]/route.ts
     public/v1/...           # API de interoperabilidad (ver §7)
 
@@ -74,8 +76,12 @@ components/
     search/ bond/ chat/ agenda/ clinical/ journal/ indications/ summaries/ progress/
 
 lib/
-  db/schema.ts, db/index.ts, db/seed.ts
-  auth.ts, auth-client.ts, session.ts      # helpers requireRole()
+  db/index.ts
+  db/schema/                # un archivo por módulo: identity, catalog, connection,
+                            # agenda, clinical, follow-up, summaries, platform. index.ts los reexporta
+  db/seed/                  # un archivo por módulo, registrados en seed/index.ts
+  navigation.ts             # mapa único de rutas y navegación por rol
+  auth.ts, auth-client.ts, session.ts      # helpers requireRole(), requireBondAccess()
   services/                 # lógica de dominio y autorización (un archivo por módulo)
   policies/                 # reglas R-xx como funciones puras y testeables
   recommendation/           # interfaz RecommendationEngine + mockEngine
@@ -145,5 +151,5 @@ Requisito: concepto inspirado en Fluent 2, con la marca reemplazable en cualquie
 |------|----------|---------------------|-----------|
 | Lenguaje natural y recomendaciones | `RecommendationEngine.recommend(text, filters)` | Diccionario de palabras clave → ramas y temas, más ranking por coincidencia, disponibilidad y cobertura. Devuelve los motivos | AI SDK (`generateObject`) o embeddings |
 | Redacción de resúmenes | `SummaryWriter.write(aggregate)` | Plantilla de texto con los datos agregados | AI SDK vía AI Gateway |
-| Videollamada | `VideoProvider.roomFor(appointment)` | Jitsi (`meet.jit.si/<id-aleatorio>`) | Daily, LiveKit o un proveedor estatal |
+| Videollamada | `VideoProvider.roomFor(appointment)`, `tokenFor(user, room)` | Daily (real) | LiveKit o un proveedor estatal |
 | Notificaciones | `Notifier.send(user, event)` | Tabla `notification` | Resend o push |

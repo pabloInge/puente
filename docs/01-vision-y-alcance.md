@@ -30,13 +30,14 @@ Aplicación del rubro psicología para **Argentina**, mobile first con versión 
 | Primera interacción | **Chat** con el profesional |
 | Recomendaciones | La plataforma muestra activamente recomendaciones según el texto ingresado |
 | Vínculo | Lo solicita el paciente; el profesional acepta o rechaza; cualquiera puede romperlo |
+| Vínculos simultáneos | **Uno solo a la vez** por paciente (P-01) |
 | Mensajería | Antes y durante el vínculo |
 | Atención / turno | Atención = tipo de servicio. Turno = franja horaria |
 | Disponibilidad | Recurrente (ej. lunes 9 a 13) y excepciones puntuales |
 | Reserva | El paciente solicita y el profesional confirma |
 | Cancelación / reprogramación | Sí, con reglas. Con recordatorios |
 | Pagos | Fuera de alcance |
-| Sesiones online | Videollamada **dentro** de la plataforma |
+| Sesiones online | Videollamada **dentro** de la plataforma (Daily, P-04) |
 | Registro clínico | Texto libre con **plantillas** opcionales |
 | Cambios y mejoras | Notas de evolución |
 | Notas del profesional | **Privadas** (ver P-02) |
@@ -83,19 +84,21 @@ Aplicación del rubro psicología para **Argentina**, mobile first con versión 
 - Botón o protocolo de crisis.
 - Apps nativas (la web es mobile first y responsive).
 
-## 5. Decisiones pendientes
+## 5. Decisiones resueltas
 
-| ID | Tema | Por qué importa | Propuesta por defecto |
-|----|------|-----------------|-----------------------|
-| P-01 | ¿Un paciente puede tener **varios profesionales activos** a la vez? Si cambia de profesional, ¿qué historial ve el nuevo? (pregunta 7 sin responder) | Define si el diario y los datos son del paciente o de cada vínculo | Se permiten varios vínculos activos. Cada vínculo tiene su propio registro clínico. Las experiencias pasadas y el resumen de cierre los comparte el paciente de forma explícita |
-| P-02 | **Conflicto legal:** la Ley 26.529 (art. 14) establece que el paciente es titular de su historia clínica y puede pedir una copia. Notas "privadas" no pueden negarse ante esa solicitud | Afecta el diseño de notas y exportación | Las notas no se ven en la app del paciente, pero existe el flujo "Solicitar copia de historia clínica", que el profesional responde exportando. Validar con asesoría legal |
-| P-03 | Historia clínica legal **sin matrícula verificada** | Un registro legal exige autor identificado y habilitado | En la demo, los perfiles muestran "Matrícula no verificada" y el registro guarda la matrícula declarada |
-| P-04 | **Proveedor de videollamada** | Costo, privacidad y esfuerzo de integración | Jitsi embebido para la demo (sin costo, sin cuenta). Evaluar Daily o LiveKit para producción |
-| P-05 | **Reglas concretas** de cancelación y reprogramación | Lógica de agenda | Configurable por profesional: anticipación mínima para cancelar (por defecto 24 h). Admin define el valor por defecto |
-| P-06 | Resúmenes con **IA real o mockeada** en la demo | Requiere AI Gateway y consideraciones de privacidad sobre datos de salud | Resumen semanal real por agregación (sin IA). El botón "Redactar con IA" usa un mock tras una interfaz, como la búsqueda en lenguaje natural |
-| P-07 | **Listado definitivo de ramas** | Catálogo inicial | Ver propuesta en [04 — Modelo §3.1](./04-modelo-de-datos.md#31-catálogo-inicial-de-ramas-propuesta) |
-| P-08 | Qué datos ve el profesional **antes** del vínculo | Privacidad | Nombre de pila, edad, provincia, temas iniciales y mensaje de solicitud |
-| P-09 | Canal de **recordatorios** | Email (Resend) o solo notificaciones internas | Notificaciones internas en la demo. Email con Resend como commit opcional |
-| P-10 | ¿Quién crea las **plantillas** de registro clínico? | Permisos y modelo | Admin crea plantillas globales; cada profesional crea las suyas |
-| P-11 | **Formato del progreso** | UI y modelo | El profesional elige por paciente: etapas con nombre, porcentaje o escala 1 a 10, con una nota opcional en cada actualización |
-| P-12 | Reglas del **chat pre-vínculo**: quién lo inicia y si tiene límites | Abuso y carga del profesional | Solo lo inicia el paciente. El profesional puede cerrar o bloquear la conversación |
+Todas las decisiones están cerradas. Ninguna bloquea el roadmap.
+
+| ID | Tema | Decisión | Impacto técnico |
+|----|------|----------|-----------------|
+| P-01 | Profesionales simultáneos | **Un solo vínculo a la vez.** El paciente puede chatear antes del vínculo con varios profesionales, pero solo puede tener **un** vínculo abierto (`requested`, `awaiting_consent` o `active`). Para empezar con otro profesional debe cancelar la solicitud o romper el vínculo actual | Índice único parcial en `bond(patient_id)` (R-12). Diario, indicaciones, resúmenes y progreso pertenecen al vínculo. El profesional nuevo **no** ve la historia clínica ni el diario del vínculo anterior; ve las experiencias pasadas y solo los resúmenes de cierre que el paciente comparta |
+| P-02 | Notas privadas y Ley 26.529 | Las notas no se muestran en la app del paciente. El paciente puede **solicitar copia de su historia clínica** y el profesional debe entregarla exportada. Plazo legal: **48 h** (art. 14) | Flujo `clinical_record_request` con indicador de vencimiento de 48 h para el profesional. Exportación en PDF auditada |
+| P-03 | Historia clínica sin matrícula verificada | Los perfiles muestran "Matrícula no verificada". Cada entrada guarda la matrícula declarada al momento de escribirla | `license_verified = false`, `author_license_snapshot` en cada entrada |
+| P-04 | Proveedor de videollamada | **Daily (Prebuilt)** detrás de `VideoProvider`. Salas privadas por turno, con token de acceso por usuario y vencimiento al terminar el turno. Si falta `DAILY_API_KEY`, la sala muestra un aviso y no se habilita | Se descarta el Jitsi público: desde 2023 `meet.jit.si` exige login y limita los embebidos a 5 minutos. Daily tiene plan gratuito suficiente para la demo. Requiere la variable `DAILY_API_KEY` |
+| P-05 | Reglas de agenda | Anticipación mínima para **solicitar**: 12 h. Para **cancelar o reprogramar** sin penalidad: 24 h; después se marca "cancelación tardía". Un turno `requested` sin confirmar **vence** a las 48 h o 2 h antes del inicio, lo que ocurra primero, y libera la franja. El paciente puede reprogramar **una vez** por turno. Los valores los define Admin por defecto y cada profesional puede ajustarlos | Campos en `professional_agenda_settings` y `platform_setting`. Cron de vencimiento junto al de recordatorios |
+| P-06 | IA en resúmenes | El resumen semanal es **real por agregación**, sin IA. El botón "Redactar con IA" usa `SummaryWriter` mock. Cuando se use IA real, se envían datos **seudonimizados** (sin nombre, DNI ni contacto) | La interfaz y el mock se construyen en la base. IA real como tarea opcional |
+| P-07 | Catálogo de ramas | Se adopta la propuesta de [04 — Modelo §3.1](./04-modelo-de-datos.md#31-catálogo-inicial-de-ramas). Admin puede editarla | Seed del catálogo |
+| P-08 | Datos del paciente antes del vínculo | Nombre de pila, edad (no la fecha de nacimiento), provincia, temas iniciales y mensaje de solicitud | Proyección `PatientPreview` en la capa de servicios (R-01) |
+| P-09 | Recordatorios | **Notificaciones internas** en la demo (centro de notificaciones con contador). Email con Resend como tarea opcional | `Notifier` con implementación sobre la tabla `notification` |
+| P-10 | Plantillas de registro clínico | Admin crea plantillas **globales**. Cada profesional crea las **propias** y puede duplicar una global para adaptarla | `clinical_template.owner_professional_id` nulo para las globales |
+| P-11 | Formato del progreso | El profesional elige por paciente: **etapas** (por defecto: Evaluación, Inicio, Desarrollo, Consolidación, Cierre, editables), **porcentaje** o **escala 1 a 10**. Cada actualización lleva una nota opcional. Cambiar el formato no borra el histórico | `progress_settings.format` y `stages`. Las actualizaciones guardan el formato vigente |
+| P-12 | Límites del chat pre-vínculo | Lo inicia solo el paciente registrado. Máximo **3 conversaciones pre-vínculo abiertas** a la vez por paciente. Hasta que el profesional responda, el paciente puede enviar como máximo **3 mensajes**. Se cierra automáticamente tras **30 días** sin actividad. El profesional puede cerrarla o bloquear al paciente | Validaciones en el servicio de chat (R-09). Cron diario de cierre por inactividad |

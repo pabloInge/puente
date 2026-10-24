@@ -114,7 +114,11 @@ Además, `session`, `account` y `verification` (Better Auth).
 | end_reason | text |
 | requested_at, accepted_at, activated_at, ended_at | timestamptz |
 
+Restricción R-12: índice único parcial `bond(patient_id) WHERE status IN ('requested', 'awaiting_consent', 'active')`.
+
 **consent_acceptance**: `id`, `bond_id`, `consent_version_id`, `accepted_at`, `ip`, `user_agent`.
+
+Campos adicionales de conversación (P-12): `patient_messages_before_reply` (int), `closed_reason` (`professional | inactivity | bond_ended`).
 
 ### 2.5 Agenda
 
@@ -122,7 +126,7 @@ Además, `session`, `account` y `verification` (Better Auth).
 **service_type_coverage** (N:M) con `service_type_id`, `coverage_id`.
 **availability_rule**: `id`, `professional_id`, `weekday` (0 a 6), `start_time`, `end_time`, `modality`, `valid_from`, `valid_to`.
 **availability_exception**: `id`, `professional_id`, `date`, `start_time`, `end_time`, `kind` (`block | extra`).
-**professional_agenda_settings**: `professional_id`, `min_booking_notice_hours`, `min_cancel_notice_hours`, `timezone` (por defecto `America/Argentina/Buenos_Aires`).
+**professional_agenda_settings**: `professional_id`, `min_booking_notice_hours` (12), `min_cancel_notice_hours` (24), `request_expiry_hours` (48), `timezone` (por defecto `America/Argentina/Buenos_Aires`). Los valores por defecto salen de `platform_setting` (P-05).
 
 **appointment**
 | Campo | Tipo |
@@ -136,7 +140,9 @@ Además, `session`, `account` y `verification` (Better Auth).
 | status | `requested, confirmed, rejected, cancelled, rescheduled, completed, no_show` |
 | cancelled_by, cancel_reason, late_cancellation | |
 | rescheduled_from_id | fk appointment |
-| video_room_id | text |
+| patient_reschedule_count | int (máximo 1) |
+| expires_at | timestamptz (solo `requested`) |
+| video_room_name | text (Daily) |
 
 Restricción: no se superponen turnos `requested` o `confirmed` del mismo profesional (constraint de exclusión con `tstzrange`).
 
@@ -164,7 +170,7 @@ Inmutable: sin `UPDATE` ni `DELETE` desde la aplicación. Se garantiza en la cap
 ### 2.7 Seguimiento
 
 **journal_entry**: `id`, `bond_id`, `patient_id`, `kind` (`conflict | need | other`), `body`, `mood` (1 a 5, nullable), `week_start` (date, lunes), `editable_until`, `read_by_professional_at`.
-> Si P-01 define el diario global del paciente, `bond_id` pasa a ser una tabla N:M de visibilidad.
+> El diario pertenece al vínculo (P-01). Al cambiar de profesional, el diario anterior no se transfiere (R-13).
 
 **indication**: `id`, `bond_id`, `title`, `description`, `kind` (`guideline | exercise | reading | other`), `frequency` (text), `valid_until`, `status` (`active | archived`), `patient_seen_at`.
 **indication_comment**: `id`, `indication_id`, `author_user_id`, `body`.
@@ -175,17 +181,20 @@ Inmutable: sin `UPDATE` ni `DELETE` desde la aplicación. Se garantiza en la cap
 **closing_summary**: `id`, `bond_id` (único), `status` (`requested | draft | approved`), `requested_by_patient_at`, `content` (jsonb o markdown), `approved_at`, `pdf_url`.
 
 **progress_settings**: `bond_id`, `format` (`stages | percent | scale_10`), `stages` (jsonb, si aplica), `visibility_policy` (`patient_decides | recommend_show | recommend_hide | blocked`), `recommendation_message`, `patient_wants_to_see` (bool).
-**progress_update**: `id`, `bond_id`, `value` (numeric o índice de etapa), `note`, `clinical_entry_id` (nullable), `created_at`.
+**progress_update**: `id`, `bond_id`, `format` (el vigente al registrar), `value` (numeric o índice de etapa), `note`, `clinical_entry_id` (nullable), `created_at`.
+Etapas por defecto (P-11): Evaluación, Inicio, Desarrollo, Consolidación, Cierre.
 
 ### 2.8 Transversal
 
 **notification**: `id`, `user_id`, `type`, `payload` (jsonb), `read_at`.
 **audit_log**: `id`, `actor_user_id`, `action` (`read | create | amend | export | ...`), `entity`, `entity_id`, `bond_id`, `ip`, `created_at`. Solo inserción.
-**clinical_record_request**: `id`, `bond_id`, `requested_at`, `fulfilled_at`, `export_url` (P-02).
+**clinical_record_request**: `id`, `bond_id`, `requested_at`, `due_at` (`requested_at` + 48 h), `fulfilled_at`, `export_url` (P-02, R-14).
 
 ## 3. Catálogos iniciales
 
-### 3.1 Catálogo inicial de ramas (propuesta, P-07)
+### 3.1 Catálogo inicial de ramas
+
+Adoptado (P-07).
 
 Áreas de aplicación reconocidas en la formación de grado y en los colegios de psicólogos de Argentina. Se proponen como ramas de primer nivel, con subramas clínicas por población o problemática para la búsqueda.
 
@@ -259,6 +268,17 @@ stateDiagram-v2
   requested --> draft: profesional inicia
   draft --> approved: profesional aprueba
   approved --> [*]: inmutable y exportable
+```
+
+### 4.3b Conversación
+
+```mermaid
+stateDiagram-v2
+  [*] --> pre_bond: paciente inicia (máx. 3 abiertas)
+  pre_bond --> bond: vínculo activado
+  pre_bond --> closed: profesional cierra o 30 días sin actividad
+  pre_bond --> blocked: profesional bloquea
+  bond --> closed: vínculo finalizado (solo lectura)
 ```
 
 ### 4.4 Visibilidad del progreso (regla efectiva)
