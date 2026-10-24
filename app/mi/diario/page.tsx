@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo, useEffect } from 'react'
+import { useState, useMemo, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import {
   Frown,
@@ -185,7 +185,6 @@ function ModalEscribir({
         </DialogHeader>
 
         <div className="flex flex-col gap-6">
-          {/* Selector de ánimo */}
           <div className="flex items-center justify-between gap-2">
             {CARITAS.map(({ valor, icon: Icon, label }) => {
               const selected = animo === valor
@@ -218,7 +217,6 @@ function ModalEscribir({
             />
           </div>
 
-          {/* Etiquetas */}
           <div className="flex flex-col gap-2">
             <span className="text-sm font-medium text-gris">Etiquetas (opcional)</span>
             <div className="flex flex-wrap gap-2">
@@ -242,7 +240,6 @@ function ModalEscribir({
             </div>
           </div>
 
-          {/* Controles de compartir */}
           <div className="flex flex-col divide-y divide-linea rounded-2xl border border-linea">
             <label className="flex min-h-14 cursor-pointer items-center justify-between gap-4 px-4">
               <span className="flex flex-col">
@@ -371,7 +368,7 @@ function TuSemanaEnPocasLineas({ proNombre, proFecha }: { proNombre: string; pro
   )
 }
 
-export default function DiarioPage() {
+function DiarioContent() {
   const searchParams = useSearchParams()
   const escribirParam = searchParams.get('escribir')
   const valorInicial = escribirParam ? Number(escribirParam) : null
@@ -515,5 +512,13 @@ export default function DiarioPage() {
         rolPro={rolPro}
       />
     </>
+  )
+}
+
+export default function DiarioPage() {
+  return (
+    <Suspense fallback={<div className="min-h-96" aria-busy="true" />}>
+      <DiarioContent />
+    </Suspense>
   )
 }
