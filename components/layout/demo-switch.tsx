@@ -11,6 +11,7 @@ export function DemoSwitch() {
     { href: '/consulta', label: 'Consulta' },
     { href: '/mi', label: 'Paciente' },
     { href: '/pro', label: 'Profesional' },
+    { href: '/ingresar', label: 'Ingresar' },
   ]
 
   const isActive = (href: string) => {
