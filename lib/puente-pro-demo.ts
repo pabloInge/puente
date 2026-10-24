@@ -18,7 +18,10 @@ import {
   formatFechaCorta,
   nombreCompleto,
   calcularEdad,
+  iniciales,
 } from './puente-demo'
+
+export * from './puente-demo'
 
 export interface EstadoDemoProfesional {
   version: number
@@ -600,3 +603,5 @@ export function responderAsistentePro(
 
   return 'Puedo ayudarte a preparar sesiones, revisar tu agenda o tus cobros. Probá con algo como "¿Qué tengo hoy?", "Resumime a Lucía antes de la sesión" o "¿Quién me debe?".'
 }
+
+
