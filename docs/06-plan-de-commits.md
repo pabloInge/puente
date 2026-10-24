@@ -50,7 +50,7 @@ Orden obligatorio: F1-01 → F1-02 → F1-03 → F1-04 → F1-05 → F1-06. Al t
 - **Docs:** 05 §4.
 - **Aceptación:** cambiar `--primary` y `--font-sans` cambia toda la app. Sin colores directos fuera de `globals.css`. Modo oscuro correcto.
 
-### [ ] F1-02 Shells, rutas y navegación
+### [x] F1-02 Shells, rutas y navegación
 - **Objetivo:** que todas las rutas existan desde el inicio, para que las pistas no editen la navegación.
 - **Entregables:**
   - `lib/navigation.ts`: mapa de **todas** las rutas del doc 05 §2 con etiqueta, icono y rol.
