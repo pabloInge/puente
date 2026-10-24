@@ -1,6 +1,6 @@
 # 06 — Roadmap y plan de commits
 
-Cada tarea es **un commit o PR** que deja la app funcionando y verificable en la preview. Las reglas de trabajo entre agentes están en [07 — Guía para agentes](./07-guia-para-agentes.md).
+Cada tarea es **un commit o PR** que deja la app funcionando y verificable en la preview. Las reglas de trabajo entre agentes están en [07 — Guía de desarrollo](./07-guia-de-desarrollo.md).
 
 Estado: `[ ]` pendiente · `[~]` en curso · `[x]` hecho · Asignado: `@agente`
 

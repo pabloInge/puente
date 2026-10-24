@@ -1,4 +1,4 @@
-# 07 — Guía para trabajar con varios agentes
+# 07 — Guía de desarrollo
 
 Reglas para que varios agentes trabajen en paralelo sin pisarse.
 
@@ -97,7 +97,7 @@ Pasos: ...
 
 ```
 Sos el agente de la pista <X> del proyecto proyecto-ship.
-Leé docs/README.md, docs/06-plan-de-commits.md y docs/07-guia-para-agentes.md.
+Leé docs/README.md, docs/06-plan-de-commits.md y docs/07-guia-de-desarrollo.md.
 Tu tarea es <ID>. Leé los documentos que cita.
 Trabajá solo en las carpetas de tu pista. No edites archivos compartidos (guía §3).
 Usá los servicios, políticas e interfaces de lib/. Usá el seed para probar.

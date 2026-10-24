@@ -15,7 +15,7 @@ Plataforma de psicología para Argentina con dos enfoques:
 | 04 | [Modelo de datos](./04-modelo-de-datos.md) | Entidades, restricciones, catálogos y máquinas de estado |
 | 05 | [Arquitectura](./05-arquitectura.md) | Stack, estructura, diseño intercambiable, seguridad, normativa, preparación estatal |
 | 06 | [Roadmap y plan de commits](./06-plan-de-commits.md) | Fases, pistas paralelas, tareas con criterios de aceptación |
-| 07 | [Guía para agentes](./07-guia-para-agentes.md) | Propiedad de archivos, flujo de PR, definición de terminado |
+| 07 | [Guía de desarrollo](./07-guia-de-desarrollo.md) | Propiedad de archivos, flujo de PR, definición de terminado |
 
 ## Convenciones
 
