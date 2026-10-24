@@ -60,7 +60,7 @@ Orden obligatorio: F1-01 → F1-02 → F1-03 → F1-04 → F1-05 → F1-06. Al t
 - **Docs:** 05 §2, §4.
 - **Aceptación:** se navega por todas las rutas en 375 px y 1280 px. Cada placeholder indica qué tarea la implementa.
 
-### [ ] F1-03 Base de datos y esquema completo
+### [x] F1-03 Base de datos y esquema completo
 - **Objetivo:** el modelo del doc 04 completo, para que ninguna pista necesite migraciones estructurales.
 - **Entregables:**
   - Conectar Neon. `lib/db/index.ts`.
