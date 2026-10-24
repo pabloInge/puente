@@ -208,18 +208,18 @@ Carpetas: `app/profesional/pacientes/[bondId]/historia-clinica`, `app/profesiona
 
 Carpetas: `app/paciente/tratamiento`, `app/paciente/diario`, `app/profesional/pacientes/[bondId]/{indicaciones,diario}`, `components/domain/{indications,journal}`, `lib/services/{indications,journal}.ts`.
 
-#### [ ] D-01 Indicaciones y recursos
+#### [x] D-01 Indicaciones y recursos
 - El profesional crea, edita y archiva indicaciones con tipo, frecuencia, vigencia y recursos (archivos o enlaces).
 - El paciente ve las vigentes y archivadas, las marca como vistas y comenta.
 - Descarga de archivos por handler que valida el vínculo.
 - **CU:** E-04, E-05, E-06.
 
-#### [ ] D-02 Diario del paciente
+#### [x] D-02 Diario del paciente
 - Crear entradas (conflicto, necesidad, otro) con estado de ánimo opcional, agrupadas por semana. Edición durante la ventana configurada.
 - Diseño de escritura rápida en mobile.
 - **CU:** E-02 · **Reglas:** R-07, R-12.
 
-#### [ ] D-03 Diario desde el profesional
+#### [x] D-03 Diario desde el profesional
 - Vista por semana con polling, indicador de no leídas, marcar como leídas al ver.
 - **CU:** E-03.
 
