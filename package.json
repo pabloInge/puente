@@ -9,6 +9,7 @@
     "start": "next start",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "node scripts/db-migrate.mjs",
+    "db:seed": "tsx --conditions=react-server --env-file-if-exists=.env.development.local scripts/db-seed.ts",
     "test": "vitest run",
     "test:watch": "vitest"
   },

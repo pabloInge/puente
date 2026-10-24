@@ -91,7 +91,7 @@ Orden obligatorio: F1-01 → F1-02 → F1-03 → F1-04 → F1-05 → F1-06. Al t
 - **Docs:** 02 §3, 05 §3, §8.
 - **Aceptación:** los tests de políticas pasan. Ninguna interfaz tiene lógica de UI.
 
-### [ ] F1-06 Seed de demo
+### [x] F1-06 Seed de demo
 - **Objetivo:** datos para que cada pista trabaje sin esperar a otras.
 - **Entregables:** `lib/db/seed/` con un archivo por módulo y `seed/index.ts`, más un script `db:seed` idempotente.
   - Catálogos: ramas (doc 04 §3.1), enfoques, coberturas y programas con bonificaciones (§3.2), consentimiento v1, términos y privacidad, 3 plantillas globales y la configuración por defecto (P-05, R-07, P-11).

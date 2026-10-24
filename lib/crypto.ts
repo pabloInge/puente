@@ -1,5 +1,10 @@
 import 'server-only'
-import { createCipheriv, createDecipheriv, randomBytes } from 'node:crypto'
+import { createCipheriv, createDecipheriv, createHash, randomBytes } from 'node:crypto'
+
+/** SHA-256 of the canonical JSON of a clinical entry's content (tamper evidence). */
+export function hashContent(content: unknown): string {
+  return createHash('sha256').update(JSON.stringify(content)).digest('hex')
+}
 
 // AES-256-GCM column encryption. Stored format: v1:<iv>:<authTag>:<ciphertext>, all base64url.
 const VERSION = 'v1'
