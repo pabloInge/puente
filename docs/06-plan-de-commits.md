@@ -150,13 +150,13 @@ Carpetas: `app/(public)`, `app/paciente/perfil`, `app/paciente/profesionales`, `
 
 Carpetas: `app/profesional/agenda`, `app/paciente/turnos`, `app/sesion`, `app/api/cron/reminders`, `components/domain/agenda`, `lib/services/agenda.ts`, `lib/agenda/` (cálculo de turnos).
 
-#### [ ] B-01 Atenciones y disponibilidad
+#### [x] B-01 Atenciones y disponibilidad
 - CRUD de tipos de atención (nombre, duración, modalidad, honorario, coberturas, "primera consulta").
 - Disponibilidad recurrente semanal y excepciones (bloqueo y franja extra).
 - Ajustes de anticipación (P-05) con los valores por defecto de la plataforma.
 - **CU:** C-01, C-02.
 
-#### [ ] B-02 Turnos libres, solicitud y confirmación
+#### [x] B-02 Turnos libres, solicitud y confirmación
 - `lib/agenda/slots.ts` (función pura con tests): reglas menos excepciones menos turnos ocupados, respetando la anticipación y la zona horaria de Argentina.
 - El paciente elige la atención y el turno, y lo solicita. El profesional confirma o rechaza.
 - Agenda del profesional: vista de día y semana en desktop, lista en mobile.
@@ -164,16 +164,16 @@ Carpetas: `app/profesional/agenda`, `app/paciente/turnos`, `app/sesion`, `app/ap
 - **CU:** C-03, C-04 · **Reglas:** R-10.
 - **Aceptación:** dos solicitudes simultáneas para el mismo turno: una falla (constraint de exclusión).
 
-#### [ ] B-03 Ciclo de vida del turno
+#### [x] B-03 Ciclo de vida del turno
 - Cancelar (cancelación tardía), reprogramar (una vez el paciente), marcar realizado o ausente.
 - Vencimiento automático de turnos sin confirmar.
 - **CU:** C-05, C-06, C-08 · **Reglas:** R-10.
 
-#### [ ] B-04 Recordatorios
+#### [x] B-04 Recordatorios
 - Cron `reminders` cada 15 min: notificaciones 24 h y 1 h antes, y vencimientos. Protegido con `CRON_SECRET`. Configuración en `vercel.json`.
 - **CU:** C-07.
 
-#### [ ] B-05 Sesión online
+#### [x] B-05 Sesión online
 - `/sesion/[appointmentId]`: autorización (solo los dos participantes), botón habilitado 10 minutos antes, sala Daily embebida con token por usuario.
 - Aviso y botón deshabilitado si falta `DAILY_API_KEY`.
 - `Permissions-Policy` de cámara y micrófono para el dominio de Daily.
